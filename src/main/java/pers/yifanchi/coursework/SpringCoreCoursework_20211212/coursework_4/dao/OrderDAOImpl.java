@@ -39,7 +39,7 @@ public class OrderDAOImpl implements OrderDAO {
 			+ "on ol.id = od.oid ";
 	@Override
 	@FilterParam("Incorrect dao query all logs")
-	public List<OrderLog> queryAllLog() throws DAOException {
+	public List<OrderLog> queryAllLog() throws Exception {
 		String sql = logDetailSql;
 		ResultSetExtractor<List<OrderLog>> resultSetExtractor = JdbcTemplateMapperFactory.newInstance()
 				.addKeys("id").newResultSetExtractor(OrderLog.class);
@@ -48,7 +48,7 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 	@Override
 	@FilterParam(value = "Incorrect order log id, id [%s] could be wrong!", isFormat = true)
-	public OrderLog queryLogById(Integer id) throws DAOException {
+	public OrderLog queryLogById(Integer id) throws Exception {
 		String sql = logDetailSql + "where ol.id = ?";
 		ResultSetExtractor<List<OrderLog>> resultSetExtractor = JdbcTemplateMapperFactory.newInstance()
 				.addKeys("id").newResultSetExtractor(OrderLog.class);
@@ -57,7 +57,7 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 	@Override
 	@FilterParam(value = "Incorrect wallet id, id [%s] could be wrong!", isFormat = true)
-	public List<OrderLog> queryLogByWid(Integer wid) throws DAOException {
+	public List<OrderLog> queryLogByWid(Integer wid) throws Exception {
 		String sql = logDetailSql + "where ol.wid = ?";
 		ResultSetExtractor<List<OrderLog>> resultSetExtractor = JdbcTemplateMapperFactory.newInstance()
 				.addKeys("id").newResultSetExtractor(OrderLog.class);
@@ -66,14 +66,14 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 	@Override
 	@FilterParam(value = "Incorrect insertion on order log [%s]", isFormat = true)
-	public Integer insertLogWithDetails(OrderLog orderLog) throws DAOException {
+	public Integer insertLogWithDetails(OrderLog orderLog) throws Exception {
 		List<OrderLog> orderLogs = new ArrayList<>();
 		orderLogs.add(orderLog);
 		return this.insertLogWithDetails(orderLogs);
 	}
 	@Override
 	@FilterParam(value = "Incorrect insertion on order log [%s]", isFormat = true)
-	public Integer insertLogWithDetails(List<OrderLog> orderLogs) throws DAOException {
+	public Integer insertLogWithDetails(List<OrderLog> orderLogs) throws Exception {
 		List<Integer> oids = this.insertLog(orderLogs);
 		List<Integer> results = new ArrayList<>();
 		for (int i=0; i<oids.size(); i++) {
@@ -84,7 +84,7 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 	@Override
 	@FilterParam(value = "Incorrect insertion on order log part, log [%s]", isFormat = true)
-	public List<Integer> insertLog(List<OrderLog> orderLogs) throws DAOException {
+	public List<Integer> insertLog(List<OrderLog> orderLogs) throws Exception {
 		String sql = "insert into orderlog(wid, money) values (?, ?)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		BatchPreparedStatementSetter batchPreparedStatementSetter = new BatchPreparedStatementSetter() {
@@ -109,7 +109,7 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 	@Override
 	@FilterParam(value = "Incorrect insertion on order log id [%s], order details [%s]", isFormat = true)
-	public Integer insertDetailsByLogId(Integer oid, List<OrderDetail> orderDetails) throws DAOException {
+	public Integer insertDetailsByLogId(Integer oid, List<OrderDetail> orderDetails) throws Exception {
 		String sql = "insert into orderdetail(oid, bid, amount) values (?, ?, ?)";
 		BatchPreparedStatementSetter batchPreparedStatementSetter = new BatchPreparedStatementSetter() {
 			@Override

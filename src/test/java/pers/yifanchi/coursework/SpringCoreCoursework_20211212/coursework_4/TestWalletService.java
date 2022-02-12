@@ -1,7 +1,6 @@
 package pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
@@ -11,43 +10,37 @@ import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.contr
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.dao.BookDAO;
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.dao.BookDAOImpl;
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.dto.BookTransactDTO;
-import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.entity.Book;
+import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.entity.Wallet;
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.exception.DAOException;
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.exception.ServiceException;
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.service.BookService;
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.service.BookServiceImpl;
+import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.service.WalletService;
+import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.service.WalletServiceImpl;
 
-public class TestBookService {
+public class TestWalletService {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("./conf/jdbc-config.xml");
-		BookServiceImpl bookService = ctx.getBean("bookServiceImpl", BookServiceImpl.class);
-		
-		Map<Integer, Integer> bookAmountMap = new HashMap<>();
-		bookAmountMap.put(1, 1);
-		bookAmountMap.put(2, 3);
-		bookAmountMap.put(3, 1);
-		BookTransactDTO bt1 = new BookTransactDTO(3, bookAmountMap);
+		WalletService walletService = ctx.getBean("walletServiceImpl", WalletServiceImpl.class);
 		/*
-		System.out.println(bt1);
+		String wname = "ChiChiStudy2";
+		Integer money = 3000;
+		Wallet wallet = new Wallet(wname, money);
 		try {
-			BookTransactDTO bt2 = bookService.getBookPrice(bt1);
-			System.out.println(bt2);
-		} catch (DAOException e) {
-			e.printStackTrace();
-		}
-		*/
-		/*
-		try {
-			bookService.booksTransact(bt1);
+			Integer key = walletService.insertWalletGetWid(wallet);
+			System.out.println(key);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		*/
+		String wname2 = "abdc";
 		try {
-			List<Book> books = bookService.getBookStocksByPage(2);
-			System.out.println(books);
-		} catch (Exception e) {}
+			Wallet wallet = walletService.queryWalletByName(wname2);
+			System.out.println(wallet);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

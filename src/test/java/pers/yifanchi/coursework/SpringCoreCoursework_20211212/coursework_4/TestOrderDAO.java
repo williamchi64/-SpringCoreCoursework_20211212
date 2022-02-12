@@ -55,19 +55,23 @@ public class TestOrderDAO {
 
 		// query all
 		System.out.println("query all");
+
+		List<OrderLog> orderLogs;
 		try {
-			List<OrderLog> orderLogs = orderDAO.queryAllLog();
+			orderLogs = orderDAO.queryAllLog();
 			orderLogs.forEach(o->System.out.println(o));
-		} catch (DAOException e) {
-			System.out.println(e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+
 		// query by id
 		System.out.println("query by id");
 		Integer id = 8;
 		try {
 			OrderLog orderLog = orderDAO.queryLogById(id);
 			System.out.println(orderLog);
-		} catch (DAOException e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		// query by wid
@@ -76,7 +80,7 @@ public class TestOrderDAO {
 		try {
 			List<OrderLog> orderLogsWid = orderDAO.queryLogByWid(wid);
 			orderLogsWid.forEach(o->System.out.println(o));
-		} catch (DAOException e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 

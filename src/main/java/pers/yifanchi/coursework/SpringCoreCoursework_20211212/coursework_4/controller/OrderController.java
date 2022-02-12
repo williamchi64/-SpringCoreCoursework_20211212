@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.dto.LogPrintDTO;
-import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.exception.DAOException;
-import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.exception.ServiceException;
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.service.OrderService;
 
 @Controller
@@ -19,9 +17,7 @@ public class OrderController {
 		List<LogPrintDTO> logPrintDTOs = null;
 		try {
 			logPrintDTOs = orderService.queryAllOrderLogs();
-		} catch (ServiceException|DAOException e) {
-			System.err.println(e.getMessage());
-		}
+		} catch (Exception e) {}
 		return logPrintDTOs;
 	}
 	
@@ -29,9 +25,7 @@ public class OrderController {
 		List<LogPrintDTO> logPrintDTOs = null;
 		try {
 			logPrintDTOs = orderService.queryOrderLogsByWid(wid);
-		} catch (ServiceException|DAOException e) {
-			System.err.println(e.getMessage());
-		}
+		} catch (Exception e) {}
 		return logPrintDTOs;
 	}
 

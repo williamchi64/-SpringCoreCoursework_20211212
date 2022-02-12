@@ -17,4 +17,6 @@ public @interface FilterParam {
 	 * Variable Arguments are detected as one parameter.
 	 */
 	boolean isFormat() default false;
+	
+	boolean disableNullFilter() default false;
 }

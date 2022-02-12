@@ -47,6 +47,8 @@ public class DAOFIlter {
 		FilterParam filterParam = method.getAnnotation(FilterParam.class);
 		String msg = "Return nothing from dao request";
 		if (filterParam!=null) {
+			if (filterParam.disableNullFilter())
+				return;
 			msg = filterParam.value();
 			if (filterParam.isFormat()) {
 				Object[] objs = (Object[]) joinPoint.getArgs();
@@ -64,6 +66,12 @@ public class DAOFIlter {
 		if (result == null)
 			throw new DAOException(msg);
 	}
-	@AfterThrowing("pointCut()")
-	public void throwing(JoinPoint joinPoint) throws DAOException {}
+	@AfterThrowing(value = "pointCut()", throwing = "e")
+	public void throwing(JoinPoint joinPoint, Throwable e) {
+		System.err.println(
+			"Caught from DAO layer: "
+			+ e.getMessage()
+		);
+		e.getSuppressed();
+	}
 }

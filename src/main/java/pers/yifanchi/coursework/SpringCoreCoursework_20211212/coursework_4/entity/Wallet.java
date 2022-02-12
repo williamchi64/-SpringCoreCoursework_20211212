@@ -4,6 +4,14 @@ public class Wallet {
 	private Integer wid;
 	private String wname;
 	private Integer money;
+	public Wallet() {
+		super();
+	}
+	public Wallet(String wname, Integer money) {
+		super();
+		this.wname = wname;
+		this.money = money;
+	}
 	public Integer getWid() {
 		return wid;
 	}

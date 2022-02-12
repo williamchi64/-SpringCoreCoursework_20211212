@@ -5,13 +5,10 @@
 ---
 
 [**題目**](#題目)
-
-- [Gjun Finance 20211212 Spring Core Coursework](#gjun-finance-20211212-spring-core-coursework)
-  - [題目](#題目)
-    - [2021/12/19 - Coursework 1](#20211219---coursework-1)
-    - [2021/12/26 - Coursework 2](#20211226---coursework-2)
-    - [2021/12/19 - Coursework 3](#20211219---coursework-3)
-    - [2021/12/19 - Coursework 4](#20211219---coursework-4)
+  - [2021/12/19 - Coursework 1](#20211219---coursework-1)
+  - [2021/12/26 - Coursework 2](#20211226---coursework-2)
+  - [2021/12/19 - Coursework 3](#20211219---coursework-3)
+  - [2021/12/19 - Coursework 4](#20211219---coursework-4)
 
 ---
 

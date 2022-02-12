@@ -11,12 +11,11 @@ import org.springframework.stereotype.Service;
 
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.dao.BookDAO;
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.dao.OrderDAO;
+import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.dao.WalletDAO;
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.dto.LogPrintDTO;
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.entity.Book;
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.entity.OrderDetail;
 import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.entity.OrderLog;
-import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.exception.DAOException;
-import pers.yifanchi.coursework.SpringCoreCoursework_20211212.coursework_4.exception.ServiceException;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -24,17 +23,19 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDAO orderDAO;
 	@Autowired
 	private BookDAO bookDAO;
+	@Autowired
+	private WalletDAO walletDAO;
 	@Override
-	public List<LogPrintDTO> queryAllOrderLogs() throws DAOException, ServiceException {
+	public List<LogPrintDTO> queryAllOrderLogs() throws Exception {
 		List<OrderLog> orderLogs = orderDAO.queryAllLog();
 		return this.generateLogPrintDTO(orderLogs);
 	}
 	@Override
-	public List<LogPrintDTO> queryOrderLogsByWid(Integer wid) throws DAOException, ServiceException {
+	public List<LogPrintDTO> queryOrderLogsByWid(Integer wid) throws Exception {
 		List<OrderLog> orderLogs = orderDAO.queryLogByWid(wid);
 		return this.generateLogPrintDTO(orderLogs);
 	}
-	private List<LogPrintDTO> generateLogPrintDTO(List<OrderLog> orderLogs) throws DAOException, ServiceException {
+	private List<LogPrintDTO> generateLogPrintDTO(List<OrderLog> orderLogs) throws Exception {
 		List<LogPrintDTO> logPrintDTOs = new ArrayList<>();
 		for (OrderLog orderLog: orderLogs) {
 			Integer wid = orderLog.getWid();
@@ -42,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 			Integer totalCost = orderLog.getMoney();
 			List<OrderDetail> orderDetails = orderLog.getOrderDetails();
 
-			String name = bookDAO.queryWalletById(wid).getWname();
+			String name = walletDAO.queryWalletById(wid).getWname();
 			Map<Integer, Integer> bookAmountMap = orderDetails.stream().collect(Collectors.toMap(o->o.getBid(), o->o.getAmount()));
 			List<Integer> bids = bookAmountMap.keySet().stream().collect(Collectors.toList());
 			List<Book> books = bookDAO.queryBookStocksByIds(bids);
