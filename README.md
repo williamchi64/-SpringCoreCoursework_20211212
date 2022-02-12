@@ -39,9 +39,10 @@
 ### 2021/12/19 - Coursework 4
 
 - [x] 1. 建立交易紀錄 order_log 資料表，試問: 資料表應如何創建 (注意: 若 book 的 price 欄位有變動，order_log 則不影響)，請完成整段資料庫 log 寫入機制
-     例如:
-     Vincent在2020/01/23 PM 2:07:51 買了Java書2本共300元
-     Vincent在2020/01/23 PM 2:08:51 買了Python書2本共200元
-     Vincent在2020/01/23 PM 2:10:51 買了Java書4本共600元
+    例如:
+    Vincent在2020/01/23 PM 2:07:51 買了Java書2本共300元
+    Vincent在2020/01/23 PM 2:08:51 買了Python書2本共200元
+    Vincent在2020/01/23 PM 2:10:51 買了Java書4本共600元
 
   程式碼: [Application](./src/main/java/pers/yifanchi/coursework/SpringCoreCoursework_20211212/coursework_4/Application.java)
+  DB備份: [all_data_backup](./src/main/java/pers/yifanchi/coursework/SpringCoreCoursework_20211212/coursework_4/sql/all_data_backup.sql)
